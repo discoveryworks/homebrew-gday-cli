@@ -14,17 +14,6 @@ class Gday < Formula
     lib.install Dir["lib/*"]
     doc.install "README.md"
     (etc/"gday").install "config.yml.example"
-    
-    # Create a wrapper script that ensures the lib directory is found
-    (bin/"gday").unlink
-    (bin/"gday").write <<~EOS
-      #!/bin/bash
-      export GDAY_LIB_DIR="#{lib}"
-      exec "#{libexec}/gday" "$@"
-    EOS
-    
-    libexec.install "bin/gday"
-    chmod 0755, bin/"gday"
   end
 
   def post_install
